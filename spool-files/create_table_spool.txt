@@ -1,0 +1,97 @@
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| apolita            |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> 
+mysql> CREATE DATABASE company;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> 
+mysql> USE company;
+Database changed
+mysql> 
+mysql> CREATE TABLE employee (
+    -> Fname VARCHAR(150) NOT NULL,
+    -> Minit VARCHAR(50), 
+    -> Lname VARCHAR(150) NOT NULL, 
+    -> Ssn VARCHAR(200) NOT NULL, 
+    -> Bdate DATE,
+    -> Address VARCHAR(255),
+    -> Sex VARCHAR(150),
+    -> Salary DECIMAL(10,2),
+    -> Super_ssn VARCHAR(200),
+    -> Dno INT NOT NULL,
+    -> PRIMARY KEY (Ssn));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE department(
+    -> Dname VARCHAR(150) NOT NULL UNIQUE,
+    -> Dnumber INT NOT NULL,
+    -> Mgr_ssn VARCHAR(200) NOT NULL,
+    -> Mgr_start_date DATE,
+    -> PRIMARY KEY (Dnumber),
+    -> FOREIGN KEY (Mgr_ssn) REFERENCES employee(Ssn) );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> 
+mysql> CREATE TABLE dept_locations(
+    -> Dnumber INT NOT NULL,
+    -> Dlocation VARCHAR(150) NOT NULL,
+    -> PRIMARY KEY (Dnumber, Dlocation),
+    -> FOREIGN KEY (Dnumber) REFERENCES department(Dnumber) );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> 
+mysql> CREATE TABLE project(
+    -> Pname VARCHAR(150) NOT NULL UNIQUE,
+    -> Pnumber INT NOT NULL,
+    -> Plocation VARCHAR(150),
+    -> Dnum INT NOT NULL,
+    -> PRIMARY KEY (Pnumber),
+    -> FOREIGN KEY (Dnum) REFERENCES department(Dnumber) );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> 
+mysql> CREATE TABLE works_on(
+    -> Essn VARCHAR(200) NOT NULL,
+    -> Pno INT NOT NULL,
+    -> Hours DECIMAL(3,1) NOT NULL,
+    -> PRIMARY KEY (Essn, Pno),
+    -> FOREIGN KEY (Essn) REFERENCES employee(Ssn),
+    -> FOREIGN KEY (Pno) REFERENCES project(Pnumber) );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> 
+mysql> CREATE TABLE dependent(
+    -> Essn VARCHAR(200) NOT NULL,
+    -> Dependent_name VARCHAR(150) NOT NULL,
+    -> Sex VARCHAR(150),
+    -> Bdate DATE,
+    -> Relationship VARCHAR(100),
+    -> PRIMARY KEY (Essn, Dependent_name),
+    -> FOREIGN KEY (Essn) REFERENCES employee(Ssn) );
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> 
+mysql> SHOW TABLES;
++-------------------+
+| Tables_in_company |
++-------------------+
+| department        |
+| dependent         |
+| dept_locations    |
+| employee          |
+| project           |
+| works_on          |
++-------------------+
+6 rows in set (0.00 sec)
+
+mysql> notee;

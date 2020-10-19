@@ -1,0 +1,88 @@
+mysql> SELECT * FROM department;
++----------------+---------+-----------+----------------+
+| Dname          | Dnumber | Mgr_ssn   | Mgr_start_date |
++----------------+---------+-----------+----------------+
+| Headquarters   |       1 | 888665555 | 1971-06-19     |
+| Networking     |       3 | 110110110 | 2009-05-15     |
+| Administration |       4 | 987654321 | 1985-01-01     |
+| Research       |       5 | 333445555 | 1978-05-22     |
+| Software       |       6 | 111111100 | 1999-05-15     |
+| Hardware       |       7 | 444444400 | 1998-05-15     |
+| Sales          |       8 | 555555500 | 1997-01-01     |
+| HR             |       9 | 112244668 | 1989-02-01     |
+| QA             |      11 | 913323708 | 2010-02-02     |
+| Customers      |      12 | 333445555 | 2013-01-14     |
++----------------+---------+-----------+----------------+
+10 rows in set (0.00 sec)
+
+mysql> INSERT INTO department VALUES ('Software Technology', 13, '333445555', '2020-08-23');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> SELECT * FROM department;
++---------------------+---------+-----------+----------------+
+| Dname               | Dnumber | Mgr_ssn   | Mgr_start_date |
++---------------------+---------+-----------+----------------+
+| Headquarters        |       1 | 888665555 | 1971-06-19     |
+| Networking          |       3 | 110110110 | 2009-05-15     |
+| Administration      |       4 | 987654321 | 1985-01-01     |
+| Research            |       5 | 333445555 | 1978-05-22     |
+| Software            |       6 | 111111100 | 1999-05-15     |
+| Hardware            |       7 | 444444400 | 1998-05-15     |
+| Sales               |       8 | 555555500 | 1997-01-01     |
+| HR                  |       9 | 112244668 | 1989-02-01     |
+| QA                  |      11 | 913323708 | 2010-02-02     |
+| Customers           |      12 | 333445555 | 2013-01-14     |
+| Software Technology |      13 | 333445555 | 2020-08-23     |
++---------------------+---------+-----------+----------------+
+11 rows in set (0.00 sec)
+
+mysql> SELECT * FROM dept_locations;
++---------+-------------+
+| Dnumber | Dlocation   |
++---------+-------------+
+|       1 | Houston     |
+|       4 | Stafford    |
+|       5 | Bellaire    |
+|       5 | Houston     |
+|       5 | Sugarland   |
+|       6 | Atlanta     |
+|       6 | Sacramento  |
+|       7 | Milwaukee   |
+|       8 | Chicago     |
+|       8 | Dallas      |
+|       8 | Miami       |
+|       8 | Philadephia |
+|       9 | Arlington   |
+|       9 | Seattle     |
+|      11 | Austin      |
++---------+-------------+
+15 rows in set (0.00 sec)
+
+mysql> INSERT INTO dept_locations VALUES (12, 'San Francisco');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM dept_locations;
++---------+---------------+
+| Dnumber | Dlocation     |
++---------+---------------+
+|       1 | Houston       |
+|       4 | Stafford      |
+|       5 | Bellaire      |
+|       5 | Houston       |
+|       5 | Sugarland     |
+|       6 | Atlanta       |
+|       6 | Sacramento    |
+|       7 | Milwaukee     |
+|       8 | Chicago       |
+|       8 | Dallas        |
+|       8 | Miami         |
+|       8 | Philadephia   |
+|       9 | Arlington     |
+|       9 | Seattle       |
+|      11 | Austin        |
+|      12 | San Francisco |
++---------+---------------+
+16 rows in set (0.00 sec)
+
+mysql> INSERT INTO employee VALUES ('Prashant', 'S', 'Singh', '9914456325', '1997-08-19', '1001 South Center St, Arlington, Texas', 'M', 115000, '5632563256', 6);
+Query OK, 1 row affected (0.01 sec)

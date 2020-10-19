@@ -1,0 +1,68 @@
+(1)
+mysql> INSERT INTO department VALUES('Services', 1, '123456789', '2012-08-11');
+ERROR 1062 (23000): Duplicate entry '1' for key 'PRIMARY'
+// A PRIMARY KEY integrity is violated -- As the department number "1" already exists; //
+
+
+(2)
+mysql> INSERT INTO department VALUES('Purchasing', 3, '990110110', '2013-02-02');
+ERROR 1062 (23000): Duplicate entry '3' for key 'PRIMARY'
+// A PRIMARY KEY integrity is violated -- As the department number "3" already exists; //
+
+
+(3)
+mysql> INSERT INTO department VALUES('Customers', 12, '333445555', '2013-01-14');
+Query OK, 1 row affected (0.00 sec)
+
+
+(4)
+mysql> UPDATE dept_locations SET Dnumber = 9 WHERE Dlocation ='Seattle';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+
+(5)
+mysql> UPDATE employee SET Salary = 55000 WHERE Ssn = 444444444;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> SELECT * FROM employee WHERE Ssn = 444444444;
+Empty set (0.00 sec)
+
+
+(6)
+mysql> INSERT INTO employee VALUES('Jane', 'B', 'Smith', '666666606', '1980-03-01', '3556 W Second Street Miami FL', 'F', 85000, '666666603', 5);
+ERROR 1062 (23000): Duplicate entry '666666606' for key 'PRIMARY'
+// A PRIMARY KEY integrity is violated -- As an employee with Ssn "666666606" already exists;
+
+mysql> SELECT * FROM employee WHERE Ssn = '666666606';
++-------+-------+-------+-----------+------------+------------------------+------+----------+-----------+-----+
+| Fname | Minit | Lname | Ssn       | Bdate      | Address                | Sex  | Salary   | Super_ssn | Dno |
++-------+-------+-------+-----------+------------+------------------------+------+----------+-----------+-----+
+| Ray   | H     | King  | 666666606 | 1949-08-16 | 213DelkRoad,Seattle,WA | M    | 44500.00 | 666666604 |   8 |
++-------+-------+-------+-----------+------------+------------------------+------+----------+-----------+-----+
+1 row in set (0.00 sec)
+
+
+(7)
+mysql> UPDATE works_on SET Essn = 25 WHERE Essn = '666884444' AND Pno = 1;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> SELECT * FROM works_on WHERE Essn = '666884444' AND Pno = 1;
+Empty set (0.00 sec)
+
+(8.1)
+mysql> DELETE FROM employee WHERE Ssn = '432765098';
+Query OK, 1 row affected (0.02 sec)
+
+(8.2)
+mysql> DELETE FROM department WHERE Dnumber = '9';
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`company`.`dept_locations`, CONSTRAINT `dept_locations_ibfk_1` FOREIGN KEY (`Dnumber`) REFERENCES `department` (`Dnumber`))
+// Referential integrity is violated on deletion
+
+(8.3)
+mysql> DELETE FROM dependent WHERE Essn = '66666608';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> notee;\
