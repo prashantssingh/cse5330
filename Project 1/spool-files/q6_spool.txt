@@ -1,0 +1,5 @@
+mysql> DELETE FROM employee WHERE Ssn = '444444400';
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`company`.`department`, CONSTRAINT `department_ibfk_1` FOREIGN KEY (`Mgr_ssn`) REFERENCES `employee` (`Ssn`))
+mysql> notee;
+
+// As it can be observed above, executing a SQL statement which attempts to delete a records with Ssn being referenced in department table violates REFERENTIAL integrity 
